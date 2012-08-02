@@ -270,7 +270,7 @@ CGPointInRect = function(point, rect)
 	} else if (isResizing) isResizing = NO;
 	else if (isRotating) isRotating = NO;
 	[[GameView sharedGameView] updateSelectionBoxes];
-	
+	[[GameView sharedGameView] refreshTables];
 	[[self superview] didPerformUndoableAction];
 	
 }

@@ -23,9 +23,9 @@
 	<!-- configure the asset server location -->
 	<script type="text/javascript">				
 		var serverInfo = { 	
-						baseUrl: "http://localhost:5983/",
-						databaseName: "mojo_scenes",
-						remoteBaseUrl: "http://remoteCouchServer:port"
+						baseUrl: "http://127.0.0.1:5984/",
+						databaseName: "dragons_scenes",
+						remoteBaseUrl: "http://10.64.110.211/assets/dragons_scenes/"
 		};
 		if (document.location.href.indexOf("file:") == 0) serverInfo.baseUrl = "http://localhost:5984/";
 	</script>

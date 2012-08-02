@@ -156,7 +156,10 @@ var gameViewInstance;
 	});
 }
 
-
+-(void)refreshTables
+{
+	[appController reloadTables];
+}
 -(void) selectNone
 {
 	if (selectionBoxes) selectionBoxes.forEach( function(e,i) {
@@ -471,7 +474,6 @@ var gameViewInstance;
 
 -(void) dragSelectedObjectsWithX: (int) x andY: (int) y sourceObject: (CPObject) src
 {	
-	[appController reloadTables];
 	if (selectedItems.length <= 1) return;
 	var unionRect = CGRectMake(0,0,0,0);
 	selectionBoxes.forEach( function(e,i) {
