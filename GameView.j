@@ -471,6 +471,7 @@ var gameViewInstance;
 
 -(void) dragSelectedObjectsWithX: (int) x andY: (int) y sourceObject: (CPObject) src
 {	
+	[appController reloadTables];
 	if (selectedItems.length <= 1) return;
 	var unionRect = CGRectMake(0,0,0,0);
 	selectionBoxes.forEach( function(e,i) {
@@ -479,6 +480,7 @@ var gameViewInstance;
 		[e groupDragWithX: x andY: y];
 		unionRect = CGRectUnion(unionRect, [e bounds]);
 	});	
+	
 	//console.log("union rect", unionRect);
 }
 

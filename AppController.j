@@ -20,6 +20,7 @@ var appController;
 var currentUser = { name: "rob" };
 
 var AssetDragType = "AssetDragType";
+window.prefabs = {};
 var prefabs = window.prefabs | {}; 
 
 /* Pusher
@@ -564,6 +565,7 @@ var prefabs = window.prefabs | {};
 }
 -(void) selectGameObjectAtIndex: (int) index
 {
+
 //	console.log("selectGameObjectAtIndex");
 	[tableView selectRowIndexes: [CPIndexSet indexSetWithIndex: index] byExtendingSelection: NO];
 	[self tableViewSelected: index];
@@ -718,11 +720,12 @@ var prefabs = window.prefabs | {};
 			} 
 			if (keys[row] == "position") {
 				// TODO: change to a more generic implementation so 3D works too
+				console.log(selectionProps.position);
 				return "("+selectionProps.position.x + ", "+selectionProps.position.y+")";
 			} 
 			if (keys[row] == "scale") {
 				// TODO: change to a more generic implementation so 3D works too
-				return "("+selectionProps.scale.x + ", "+selectionProps.scale.y+")";
+				return "("+selectionProps.scale.x + ", "+selectionProps.scale.y+")";				
 			} 
 			if (keys[row] == "anchorPoint") {
 				// TODO: change to a more generic implementation so 3D works too
