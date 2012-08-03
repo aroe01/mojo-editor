@@ -308,6 +308,8 @@ var gameViewInstance;
 {
 	target = [self addGameObject: o parent: p];	
 	if (o.children.length > 0) o.children.forEach(function(c){ [self addGameObject: c withParent: target]});
+	var index = [self getObjectIndexFromPoint:target.getPosition()];
+	[appController selectGameObjectAtIndex: index];
 }
 
 -(void) willPerformUndoableAction
@@ -486,25 +488,35 @@ var gameViewInstance;
 	//console.log("union rect", unionRect);
 }
 
-- (void)mouseDown: (CPEvent) e
+-(int) getObjectIndexFromPoint: (CGPoint) p
 {
-	if ( playing ) return;
-
-	var p = [e globalLocation];
 	var p2 = new goog.math.Coordinate(p.x, p.y);
 	var be = { screenPosition: p2 };
-	var found = NO;
 	
 	var all = renderContext.getObjects();
 	for (i=all.length-1; i>=0; i--)
 	{
 		if (renderContext.getObjectAtIndex(i).hitTest(be)) {
-			found = YES;
-			[appController selectGameObjectAtIndex: i];
-			break;
+			return i;
 		}
 	}
-	if (! found) /*[self setSelectionEmpty];*/ [self selectNone];
+	return -1;
+}
+
+- (void)mouseDown: (CPEvent) e
+{
+	if ( playing ) return;
+
+	var p = [e globalLocation];
+	var i = [self getObjectIndexFromPoint: p];
+	var found = i >= 0;
+	if(found){
+		[appController selectGameObjectAtIndex: i];
+	}
+	else
+	{
+		[self selectNone];
+	}
 }
 
 // -(void) drawRect: (CGRect) r

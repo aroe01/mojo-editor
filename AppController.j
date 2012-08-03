@@ -1180,7 +1180,6 @@ var prefabs = window.prefabs | {};
 
 //	target = [gameView addGameObject: o parent: p];	
 //	if (o.children.length > 0) o.children.forEach(function(c){ [gameView addGameObject: c withParent: target]});
-	
 	[gameView createSceneObject: o withParent: p];
 }
 
