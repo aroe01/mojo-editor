@@ -1100,15 +1100,15 @@ var prefabs = window.prefabs | {};
 
 -(@action) saveDocument: (id) sender
 {
-	if (openDocument != undefined) {
+	var optionFlag = [[[CPApplication sharedApplication] currentEvent] modifierFlags] == CPAlternateKeyMask;
+	if (openDocument != undefined && !optionFlag) {
 		var scene = renderContext.objectifyContext();
 		openDocument.scene = scene;
 		openDocument.type = "scene";
 		openDocument.updated = JSON.stringify(new Date());
 		openDocument.updated_by = currentUser.name;
 		openDocument.comment = prompt("Revision comments:");
-		
-		console.log("saving:",openDocument);
+		if (openDocument.comment == null){ console.log("FAILED TO SAVE");return;}
 		//var s = serverInfo.baseUrl + "/" + serverInfo.databaseName + "/" + docName + "?callback=couchSaveCallback";
 		url = [[RTCouchServer sharedCouchServer] serverAndDatabase] + "/" + openDocument._id;
 		var request = [CPURLRequest requestWithURL: url];
@@ -1127,7 +1127,7 @@ var prefabs = window.prefabs | {};
 	} else {
 		// ask for scene name
 		var doc_id = prompt("Save as:");
-		if (doc_id == "") return;
+		if (doc_id == null){ console.log("FAILED TO SAVE");return;}
 		docName = doc_id;
 		var currentDate = JSON.stringify(new Date());
 		openDocument = { comment: "initial creation", created: currentDate, created_by: currentUser.name, type: 'scene', updated: currentDate, scene: renderContext.objectifyContext() };
